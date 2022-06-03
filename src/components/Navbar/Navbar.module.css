@@ -1,0 +1,8 @@
+.main {
+    grid-area: Navbar;
+    background-color: lightgreen;
+}
+
+.item {
+    color: darkgrey;
+}

@@ -1,0 +1,8 @@
+.main {
+    grid-area: Profile;
+    background-color: mediumspringgreen;
+}
+
+.item {
+    color: darkgrey;
+}
