@@ -4,9 +4,13 @@ display: grid;
 width: 1200px;
 grid-template-areas:
 "Header Header"
-"Navbar Profile"
-"Footer Footer";
+"Navbar Content";
 grid-template-rows: 60px 1fr;
 grid-template-columns: 2fr 10fr;
 grid-gap: 10px;
+}
+
+.App-wrapper-content {
+    grid-area: Content;
+    background-color: mediumspringgreen;
 }
