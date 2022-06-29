@@ -4,7 +4,7 @@ import images from "../../../images/images";
 
 type profileInfoPropsType = {
     name: string
-    age: number
+    age: string
     status: string
     avatar: string
 }
@@ -22,6 +22,6 @@ const ProfileInfo = (props: profileInfoPropsType) => {
             <div>{props.status}</div>
         </div>
     )
-}
+};
 
 export default ProfileInfo;

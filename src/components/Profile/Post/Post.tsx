@@ -1,7 +1,13 @@
-import React from "react";
+import React from 'react';
 import styles from './Post.module.css';
 
-const Post = (props: any) => {
+type PostPropsType = {
+    message: string
+    likes: string
+    avatar: string
+}
+
+const Post = (props: PostPropsType) => {
     return (
         <div className={styles.main}>
             <h3>MY NEW POST</h3>
