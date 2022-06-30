@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './Post.module.css';
 
 type PostPropsType = {
-    message: string
-    likes: string
+    state: any
     avatar: string
 }
 
@@ -22,10 +21,10 @@ const Post = (props: PostPropsType) => {
                 className={styles.avatar}
                 alt="users avatar"
             ></img>
-            <div className={styles.item}>Message: {props.message}</div>
-            <div className={styles.item}>Likes: {props.likes}</div>
+            <div className={styles.item}>Message: {props.state[0].message}</div>
+            <div className={styles.item}>Likes: {props.state[0].likesCount}</div>
         </div>
-    )
-}
+    );
+};
 
 export default Post;

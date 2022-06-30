@@ -4,7 +4,9 @@ import images from '../../images/images';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import Post from './Post/Post';
 
-const Profile = () => {
+
+
+const Profile = (props: any) => {
     return (
         <div className={styles.main}>
             <ProfileInfo
@@ -14,8 +16,7 @@ const Profile = () => {
                 avatar={images.avatar}
             />
             <Post
-                message="MY FIRST POST"
-                likes="2"
+                state={props.state.posts}
                 avatar={images.avatar}
             />
         </div>
