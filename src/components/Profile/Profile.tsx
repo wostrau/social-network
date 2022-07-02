@@ -6,6 +6,8 @@ import MyPosts from './MyPosts/MyPosts';
 
 type ProfilePropsType = {
     state: any
+    addPost: (postMessage: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 const Profile = (props: ProfilePropsType) => {
@@ -18,8 +20,10 @@ const Profile = (props: ProfilePropsType) => {
                 avatar={images.avatar}
             />
             <MyPosts
-                state={props.state.posts}
                 avatar={images.avatar}
+                state={props.state.posts}
+                addPost={props.addPost}
+                updateNewPostText={props.updateNewPostText}
             />
         </div>
     );

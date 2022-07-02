@@ -4,33 +4,35 @@ import Header from './components/Header/Header';
 import Profile from './components/Profile/Profile';
 import Navbar from './components/Navbar/Navbar';
 import Dialogs from './components/Dialogs/Dialogs';
-import {
-    BrowserRouter as Router,
-    Route,
-} from 'react-router-dom';
-
+import {Route} from 'react-router-dom';
+import {updateNewPostText} from './redux/state';
 
 type statePropsType = {
     state: any
+    addPost: (postMessage: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 const App = (props: statePropsType) => {
-    // @ts-ignore
     return (
-        <Router>
-            <div className="App-wrapper">
-                <Header/>
-                <Navbar/>
-                <div className="App-wrapper-content">
-                        <Route path="/profile">
-                            <Profile state={props.state.profilePage}/>
-                        </Route>
-                        <Route path="/dialogs">
-                            <Dialogs state={props.state.dialogsPage}/>
-                        </Route>
-                </div>
+        <div className="App-wrapper">
+            <Header/>
+            <Navbar/>
+            <div className="App-wrapper-content">
+                <Route path="/profile">
+                    <Profile
+                        state={props.state.profilePage}
+                        addPost={props.addPost}
+                        updateNewPostText={props.updateNewPostText}
+                    />
+                </Route>
+                <Route path="/dialogs">
+                    <Dialogs
+                        state={props.state.dialogsPage}
+                    />
+                </Route>
             </div>
-        </Router>
+        </div>
     )
 };
 
