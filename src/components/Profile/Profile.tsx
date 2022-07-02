@@ -2,11 +2,13 @@ import React from 'react';
 import styles from './Profile.module.css';
 import images from '../../images/images';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import Post from './Post/Post';
+import MyPosts from './MyPosts/MyPosts';
 
+type ProfilePropsType = {
+    state: any
+}
 
-
-const Profile = (props: any) => {
+const Profile = (props: ProfilePropsType) => {
     return (
         <div className={styles.main}>
             <ProfileInfo
@@ -15,7 +17,7 @@ const Profile = (props: any) => {
                 status="online"
                 avatar={images.avatar}
             />
-            <Post
+            <MyPosts
                 state={props.state.posts}
                 avatar={images.avatar}
             />
