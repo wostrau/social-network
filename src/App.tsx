@@ -5,15 +5,14 @@ import Profile from './components/Profile/Profile';
 import Navbar from './components/Navbar/Navbar';
 import Dialogs from './components/Dialogs/Dialogs';
 import {Route} from 'react-router-dom';
-import {updateNewPostText} from './redux/state';
 
-type statePropsType = {
+type ProfilePropsType = {
     state: any
     addPost: (postMessage: string) => void
     updateNewPostText: (newText: string) => void
 }
 
-const App = (props: statePropsType) => {
+const App = (props: ProfilePropsType) => {
     return (
         <div className="App-wrapper">
             <Header/>

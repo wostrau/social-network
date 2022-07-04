@@ -1,6 +1,32 @@
-import {rerenderEntireTree} from '../render';
+type MessageType = {
+    id: number
+    message: string
+}
+type DialogType = {
+    id: number
+    message: string
+}
+type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+}
+type RootStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogPageType
+}
 
-export const state = {
+let rerenderEntireTree = () = {};
+
+export const state: RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi', likesCount: 10},
@@ -43,4 +69,8 @@ export const addPost = () => {
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
+};
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
 };
