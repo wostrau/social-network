@@ -5,10 +5,11 @@ import Profile from './components/Profile/Profile';
 import Navbar from './components/Navbar/Navbar';
 import Dialogs from './components/Dialogs/Dialogs';
 import {Route} from 'react-router-dom';
-import {addPost, state} from './redux/state';
+import {addPost, changeNewText, PostType, state} from './redux/state';
 
 type ProfilePropsType = {
     state: any
+    addPost: (postMessage: string) => void
     updateNewPostText: (newText: string) => void
 }
 
@@ -33,13 +34,15 @@ const App = (props: ProfilePropsType) => {
                         state={props.state.dialogsPage}
                     />
                 </Route>
-                <Route>
+                <Route path="/hello">
                     <HelloMessage
-                        message={message}
+                        posts={state.profilePage.posts}
+                        message={state.profilePage.newPostText}
                         addPost={addPost}
+                        changeNewText={changeNewText}
                     />
                 </Route>
-                <Route>
+                <Route path="/bye">
                     <ByeMessage
                         message={message2}
                     />
@@ -51,26 +54,33 @@ const App = (props: ProfilePropsType) => {
 
 type MessageType = {
     message: string
+    posts?: Array<PostType>
     addPost?: (postMessage: string) => void
+    changeNewText: (newText: string) => void
 }
 
 function HelloMessage(props: MessageType) {
-    let postMessageRef = React.createRef<HTMLTextAreaElement>();
+    props.addPost(props.message)
+};
 
-    const addPost = () => {
-        alert(postMessageRef.current?.value)
-    };
-
-    return <div>
-        {props.message}
-        <textarea
-            ref={postMessageRef}
-        ></textarea>
-        <button
-            onClick={addPost}
-        >add post
-        </button>
-    </div>
+return <div>
+    <hr/>
+    {props.message}
+    <hr/>
+    {props.posts.map(p => <div key={p.id}><b>{p.message}</b></div>)}
+    <hr/>
+    <textarea
+        ref={postMessageRef}
+        value={props.message}
+        onChange={(e) => {
+            props.changeNewText(e.currentTarget.value);
+        }}
+    ></textarea>
+    <button
+        onClick={addPost}
+    >add post
+    </button>
+</div>
 }
 
 const ByeMessage: React.FC<MessageType> = (props) => {
