@@ -3,12 +3,7 @@ import styles from './Profile.module.css';
 import images from '../../images/images';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPosts from './MyPosts/MyPosts';
-
-type ProfilePropsType = {
-    state: any
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
-}
+import {ProfilePropsType} from '../../App';
 
 const Profile = (props: ProfilePropsType) => {
     return (
@@ -21,9 +16,8 @@ const Profile = (props: ProfilePropsType) => {
             />
             <MyPosts
                 avatar={images.avatar}
-                state={props.state.posts}
-                addPost={props.addPost}
-                updateNewPostText={props.updateNewPostText}
+                state={props.state.profilePage.posts}
+                dispatch={props.dispatch}
             />
         </div>
     );

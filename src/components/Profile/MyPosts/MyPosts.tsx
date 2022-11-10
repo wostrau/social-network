@@ -1,16 +1,21 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
+import {ActionType} from '../../../redux/state';
 
-type PostPropsType = {
-    state: any
+type PostMessage = {
     avatar: string
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+    message: string
+    likesCount: number
+}
+type PostPropsType = {
+    state: Array<PostMessage>
+    avatar: string
+    dispatch: (a: ActionType) => void
 }
 
 const MyPosts = (props: PostPropsType) => {
-    const postsElements = props.state.map((p: { avatar: string; message: string; likesCount: number }) => {
+    const postsElements = props.state.map(p => {
         return <Post
             avatar={p.avatar}
             message={p.message}
@@ -22,12 +27,14 @@ const MyPosts = (props: PostPropsType) => {
 
     const addPostHandler = () => {
         const text = newPostElement.current.value;
-        props.addPost(text);
+        const action = {type: 'ADD-POST', newText: text};
+        props.dispatch(action);
     };
 
     const onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        const text = newPostElement.current.value;
+        const action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
+        props.dispatch(action);
     };
 
     return (

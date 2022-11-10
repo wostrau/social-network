@@ -5,12 +5,11 @@ import Profile from './components/Profile/Profile';
 import Navbar from './components/Navbar/Navbar';
 import Dialogs from './components/Dialogs/Dialogs';
 import {Route} from 'react-router-dom';
-import {addPost, changeNewText, PostType, state} from './redux/state';
+import {ActionType, addPost, changeNewText, PostType, RootStateType, state} from './redux/state';
 
-type ProfilePropsType = {
-    state: any
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+export type ProfilePropsType = {
+    state: RootStateType
+    dispatch: (a: ActionType) => void
 }
 
 const App = (props: ProfilePropsType) => {
@@ -25,8 +24,7 @@ const App = (props: ProfilePropsType) => {
                 <Route path="/profile">
                     <Profile
                         state={props.state.profilePage}
-                        addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText}
+                        dispatch={props.dispatch}
                     />
                 </Route>
                 <Route path="/dialogs">
