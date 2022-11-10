@@ -61,26 +61,28 @@ type MessageType = {
 
 function HelloMessage(props: MessageType) {
     props.addPost(props.message)
-};
 
-return <div>
-    <hr/>
-    {props.message}
-    <hr/>
-    {props.posts.map(p => <div key={p.id}><b>{p.message}</b></div>)}
-    <hr/>
-    <textarea
-        ref={postMessageRef}
-        value={props.message}
-        onChange={(e) => {
-            props.changeNewText(e.currentTarget.value);
-        }}
-    ></textarea>
-    <button
-        onClick={addPost}
-    >add post
-    </button>
-</div>
+
+    return (
+        <div>
+            <hr/>
+            {props.message}
+            <hr/>
+            {props.posts.map(p => <div key={p.id}><b>{p.message}</b></div>)}
+            <hr/>
+            <textarea
+                ref={postMessageRef}
+                value={props.message}
+                onChange={(e) => {
+                    props.changeNewText(e.currentTarget.value);
+                }}
+            ></textarea>
+            <button
+                onClick={addPost}
+            >add post
+            </button>
+        </div>
+    )
 }
 
 const ByeMessage: React.FC<MessageType> = (props) => {

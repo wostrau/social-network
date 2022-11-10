@@ -1,6 +1,28 @@
 import React from 'react';
-import {state} from './redux/state';
-import {rerenderEntireTree} from './render';
+import ReactDOM from 'react-dom/client';
+import {StoreType} from './redux/state';
+import {BrowserRouter} from 'react-router-dom';
+import App from './App';
+import store from './redux/state';
 
-rerenderEntireTree(state);
-/*subscribe(rerenderEntireTree);*/
+const rerenderEntireTree = (store: StoreType) => {
+    const root = ReactDOM.createRoot(
+        document.getElementById('root') as HTMLElement
+    )
+    root.render(
+        <React.StrictMode>
+            <BrowserRouter>
+                <App
+                    state={store.getState()}
+                    addPost={store.addPost.bind(store)}
+                    updateNewPostText={store.updateNewPostText.bind(store)}
+                />
+            </BrowserRouter>
+        </React.StrictMode>
+    )
+};
+
+rerenderEntireTree(store);
+store.subscribe(rerenderEntireTree);
+
+//serviceWorker.unregister();
