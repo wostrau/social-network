@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionType} from '../../../redux/state';
+import {ActionType, addPostActionCreator, updateNewPostTextActionCreator} from '../../../redux/state';
 
 type PostMessage = {
     avatar: string
@@ -13,15 +13,6 @@ type PostPropsType = {
     avatar: string
     dispatch: (a: ActionType) => void
 }
-
-//action creators
-const addPostActionCreator = (newText: string) => {
-    return {type: 'ADD-POST', newText: newText};
-};
-const updateNewPostTextActionCreator = (newText: string) => {
-    return {type: 'UPDATE-NEW-POST-TEXT', newText: newText};
-};
-
 
 const MyPosts = (props: PostPropsType) => {
     const postsElements = props.state.map(p => {

@@ -58,7 +58,7 @@ export const store: StoreType = {
     },
 
     dispatch(action: { type: string, newText: string }) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost: PostType = {
                 id: new Date().getTime(),
                 message: this._state.profilePage.newPostText,
@@ -67,12 +67,20 @@ export const store: StoreType = {
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
         }
     }
 };
+
+//vars for AC
+let ADD_POST = 'ADD-POST';
+let UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
+//action creators
+export const addPostActionCreator = (newText: string) => ({type: ADD_POST, newText: newText});
+export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText});
 
 //types
 type MessageType = {
@@ -111,8 +119,8 @@ export type StoreType = {
     dispatch: (a: ActionType) => void
 }
 export type ActionType = {
-        type: string,
-        newText: string
+    type: string,
+    newText: string
 }
 
 //for access to store from global window
