@@ -1,5 +1,3 @@
-//API - application program interface
-
 //store
 export const store: StoreType = {
     _state: {
@@ -27,7 +25,8 @@ export const store: StoreType = {
                 {id: 3, message: 'Boom-boom!'},
                 {id: 4, message: 'Come on, come on!'},
                 {id: 5, message: 'Great!'}
-            ]
+            ],
+            newMessageBody: ''
         },
         sidebar: {}
     },
@@ -42,22 +41,7 @@ export const store: StoreType = {
         this._callSubscriber = observer;
     },
 
-    addPost(postMessage: string) {
-        let newPost: PostType = {
-            id: new Date().getTime(),
-            message: postMessage,
-            likesCount: 0
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-
-    dispatch(action: { type: string, newText: string }) {
+    dispatch(action: ActionType) {
         if (action.type === ADD_POST) {
             let newPost: PostType = {
                 id: new Date().getTime(),
@@ -70,34 +54,47 @@ export const store: StoreType = {
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messages.push({id: 6, message: body});
+            this._callSubscriber(this._state);
         }
     }
 };
 
 //vars for AC
-let ADD_POST = 'ADD-POST';
-let UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 //action creators
 export const addPostActionCreator = (newText: string) => ({type: ADD_POST, newText: newText});
 export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText});
+export const updateNewMessageBodyActionCreator = (body: string) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body});
+export const sendMessageActionCreator = () => ({type: SEND_MESSAGE});
 
 //types
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
-type DialogType = {
+export type DialogType = {
     id: number
     message: string
 }
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-type DialogPageType = {
+export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageBody: string
 }
 export type PostType = {
     id: number
@@ -119,9 +116,11 @@ export type StoreType = {
     dispatch: (a: ActionType) => void
 }
 export type ActionType = {
-    type: string,
-    newText: string
+    type: string
+    newText?: string | undefined
 }
 
 //for access to store from global window
 //window.store = store;
+
+//API - application program interface --> just FYI

@@ -17,6 +17,15 @@ const Navbar = () => {
                     className={({isActive}) => styles.activeLink}
                 >Messages</NavLink>
             </div>
+            <div className={styles.item}>
+                <a href={''}>News</a>
+            </div>
+            <div className={styles.item}>
+                <a href={''}>Music</a>
+            </div>
+            <div className={styles.item}>
+                <a href={''}>Settings</a>
+            </div>
         </nav>
     );
 };

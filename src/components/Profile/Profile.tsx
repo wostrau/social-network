@@ -3,7 +3,12 @@ import styles from './Profile.module.css';
 import images from '../../images/images';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPosts from './MyPosts/MyPosts';
-import {ProfilePropsType} from '../../App';
+import {ActionType, ProfilePageType} from '../../redux/state';
+
+type ProfilePropsType = {
+    profilePage: ProfilePageType
+    dispatch: (a: ActionType) => void
+}
 
 const Profile = (props: ProfilePropsType) => {
     return (
@@ -16,8 +21,8 @@ const Profile = (props: ProfilePropsType) => {
             />
             <MyPosts
                 avatar={images.avatar}
-                posts={props.profilePage.profilePage.posts}
-                newPostText={props.profilePage.profilePage.newPostText}
+                posts={props.profilePage.posts}
+                newPostText={props.profilePage.newPostText}
                 dispatch={props.dispatch}
             />
         </div>
