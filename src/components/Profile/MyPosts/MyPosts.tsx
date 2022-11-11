@@ -14,6 +14,15 @@ type PostPropsType = {
     dispatch: (a: ActionType) => void
 }
 
+//action creators
+const addPostActionCreator = (newText: string) => {
+    return {type: 'ADD-POST', newText: newText};
+};
+const updateNewPostTextActionCreator = (newText: string) => {
+    return {type: 'UPDATE-NEW-POST-TEXT', newText: newText};
+};
+
+
 const MyPosts = (props: PostPropsType) => {
     const postsElements = props.state.map(p => {
         return <Post
@@ -27,14 +36,14 @@ const MyPosts = (props: PostPropsType) => {
 
     const addPostHandler = () => {
         const text = newPostElement.current.value;
-        const action = {type: 'ADD-POST', newText: text};
-        props.dispatch(action);
+        //const action = {type: 'ADD-POST', newText: text};
+        props.dispatch(addPostActionCreator(text));
     };
 
     const onPostChange = () => {
         const text = newPostElement.current.value;
-        const action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
-        props.dispatch(action);
+        //const action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
+        props.dispatch(updateNewPostTextActionCreator(text));
     };
 
     return (

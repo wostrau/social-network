@@ -8,7 +8,7 @@ import {Route} from 'react-router-dom';
 import {ActionType, addPost, changeNewText, PostType, RootStateType, state} from './redux/state';
 
 export type ProfilePropsType = {
-    state: RootStateType
+    profilePage: RootStateType
     dispatch: (a: ActionType) => void
 }
 
@@ -23,7 +23,7 @@ const App = (props: ProfilePropsType) => {
             <div className="App-wrapper-content">
                 <Route path="/profile">
                     <Profile
-                        state={props.state.profilePage}
+                        profilePage={props.state.profilePage}
                         dispatch={props.dispatch}
                     />
                 </Route>

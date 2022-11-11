@@ -16,7 +16,8 @@ const Profile = (props: ProfilePropsType) => {
             />
             <MyPosts
                 avatar={images.avatar}
-                state={props.state.profilePage.posts}
+                posts={props.profilePage.profilePage.posts}
+                newPostText={props.profilePage.profilePage.newPostText}
                 dispatch={props.dispatch}
             />
         </div>
