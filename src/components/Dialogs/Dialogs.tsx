@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import {sendMessageActionCreator, StoreType, updateNewMessageBodyActionCreator} from '../../redux/state';
+import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from '../../redux/dialogs-reducer';
 
 const Dialogs = (props: {}) => {
     const state = props.store.getState().profilePage;

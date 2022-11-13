@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionType, addPostActionCreator, updateNewPostTextActionCreator} from '../../../redux/state';
+import {ActionType} from '../../../redux/state';
+import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../redux/profile-reducer';
 
 type PostMessage = {
     avatar: string
