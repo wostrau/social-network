@@ -1,21 +1,15 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionType} from '../../../redux/store';
-import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../redux/profile-reducer';
 
-type PostMessage = {
-    avatar: string
-    message: string
-    likesCount: number
-}
-type PostPropsType = {
-    state: Array<PostMessage>
-    avatar: string
-    dispatch: (a: ActionType) => void
+type MyPostsPropsType = {
+    state: any
+    addPost: any
+    updateNewPostText: any
+
 }
 
-const MyPosts = (props: PostPropsType) => {
+const MyPosts = (props: MyPostsPropsType) => {
     const postsElements = props.state.map(p => {
         return <Post
             avatar={p.avatar}
@@ -26,21 +20,18 @@ const MyPosts = (props: PostPropsType) => {
 
     const newPostElement = React.createRef();
 
-    const addPostHandler = () => {
-        const text = newPostElement.current.value;
-        //const action = {type: 'ADD-POST', newText: text};
-        props.dispatch(addPostActionCreator(text));
+    const onAddPost = () => {
+        props.addPost();
     };
 
     const onPostChange = () => {
         const text = newPostElement.current.value;
-        //const action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
-        props.dispatch(updateNewPostTextActionCreator(text));
+        props.updateNewPostText(text);
     };
 
     return (
         <div className={styles.main}>
-            <h3>MY NEW POST</h3>
+            <h3>My posts</h3>
             <div className={styles.item}>
                 <textarea
                     ref={newPostElement}
@@ -49,7 +40,7 @@ const MyPosts = (props: PostPropsType) => {
             </div>
             <div className={styles.item}>
                 <button
-                    onClick={addPostHandler}
+                    onClick={onAddPost}
                 >Add post
                 </button>
             </div>

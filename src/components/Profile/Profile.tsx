@@ -2,12 +2,10 @@ import React from 'react';
 import styles from './Profile.module.css';
 import images from '../../images/images';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import MyPosts from './MyPosts/MyPosts';
-import {ActionType, ProfilePageType} from '../../redux/store';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 type ProfilePropsType = {
-    profilePage: ProfilePageType
-    dispatch: (a: ActionType) => void
+    store: any
 }
 
 const Profile = (props: ProfilePropsType) => {
@@ -19,11 +17,8 @@ const Profile = (props: ProfilePropsType) => {
                 status="online"
                 avatar={images.avatar}
             />
-            <MyPosts
-                avatar={images.avatar}
-                posts={props.profilePage.posts}
-                newPostText={props.profilePage.newPostText}
-                dispatch={props.dispatch}
+            <MyPostsContainer
+                store={props.store}
             />
         </div>
     );
