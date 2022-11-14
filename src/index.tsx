@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {StoreType} from './redux/state';
+import {StoreType} from './redux/store';
 import {BrowserRouter} from 'react-router-dom';
 import App from './App';
-import {store} from './redux/state';
+import {store} from './redux/store';
 
 const rerenderEntireTree = (store: StoreType) => {
     const root = ReactDOM.createRoot(
