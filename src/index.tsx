@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {StoreType} from './redux/store';
 import {BrowserRouter} from 'react-router-dom';
 import App from './App';
-import {store} from './redux/store';
+import {store} from './redux/redux-store';
 
 const rerenderEntireTree = (store: StoreType) => {
     const root = ReactDOM.createRoot(
@@ -21,7 +21,10 @@ const rerenderEntireTree = (store: StoreType) => {
     )
 };
 
-rerenderEntireTree(store);
-store.subscribe(rerenderEntireTree);
+rerenderEntireTree(store.getState());
+store.subscribe(()=>{
+    const state = store.getState();
+    rerenderEntireTree(state);
+});
 
 //serviceWorker.unregister();
