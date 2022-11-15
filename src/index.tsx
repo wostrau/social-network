@@ -4,6 +4,7 @@ import {StoreType} from './redux/store';
 import {BrowserRouter} from 'react-router-dom';
 import App from './App';
 import {store} from './redux/redux-store';
+import {Provider} from './StoreContext';
 
 const rerenderEntireTree = (store: StoreType) => {
     const root = ReactDOM.createRoot(
@@ -12,17 +13,16 @@ const rerenderEntireTree = (store: StoreType) => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App
-                    store={store}
-                    dispatch={store.dispatch.bind(store)}
-                />
+                <Provider value={store}>
+                    <App/>
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>
     )
 };
 
 rerenderEntireTree(store.getState());
-store.subscribe(()=>{
+store.subscribe(() => {
     const state = store.getState();
     rerenderEntireTree(state);
 });
