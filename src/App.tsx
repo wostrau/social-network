@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import Profile from './components/Profile/Profile';
 import Navbar from './components/Navbar/Navbar';
 import {Route} from 'react-router-dom';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 type AppPropsType = {
     store: any
