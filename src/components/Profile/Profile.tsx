@@ -4,11 +4,7 @@ import images from '../../images/images';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 
-type ProfilePropsType = {
-    store: any
-}
-
-const Profile = (props: ProfilePropsType) => {
+const Profile = () => {
     return (
         <div className={styles.main}>
             <ProfileInfo
@@ -17,9 +13,7 @@ const Profile = (props: ProfilePropsType) => {
                 status="online"
                 avatar={images.avatar}
             />
-            <MyPostsContainer
-                store={props.store}
-            />
+            <MyPostsContainer/>
         </div>
     );
 };

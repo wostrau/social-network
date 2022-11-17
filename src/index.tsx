@@ -7,12 +7,11 @@ import {store} from './redux/redux-store';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-//стремная конструкция со store!!! нужно перепроверить...
 root.render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={store}>
-                <App store={store}/>
+                <App/>
             </Provider>
         </BrowserRouter>
     </React.StrictMode>

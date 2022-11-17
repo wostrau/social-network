@@ -10,7 +10,7 @@ type MyPostsPropsType = {
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
-    const postsElements = props.state.map(p => {
+    const postsElements = props.state.map((p: { avatar: any; message: string; likesCount: number; }) => {
         return <Post
             avatar={p.avatar}
             message={p.message}
