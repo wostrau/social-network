@@ -1,16 +1,15 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 
 type MyPostsPropsType = {
-    state: any
+    posts: any
     addPost: any
     updateNewPostText: any
-
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
-    const postsElements = props.state.map((p: { avatar: any; message: string; likesCount: number; }) => {
+    const postsElements = props.posts.map((p: { avatar: any; message: string; likesCount: number; }) => {
         return <Post
             avatar={p.avatar}
             message={p.message}
@@ -18,14 +17,12 @@ const MyPosts = (props: MyPostsPropsType) => {
         />
     });
 
-    const newPostElement = React.createRef();
-
     const onAddPost = () => {
         props.addPost();
     };
 
-    const onPostChange = () => {
-        const text = newPostElement.current.value;
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.currentTarget.value;
         props.updateNewPostText(text);
     };
 
@@ -34,7 +31,6 @@ const MyPosts = (props: MyPostsPropsType) => {
             <h3>My posts</h3>
             <div className={styles.item}>
                 <textarea
-                    ref={newPostElement}
                     onChange={onPostChange}
                 ></textarea>
             </div>

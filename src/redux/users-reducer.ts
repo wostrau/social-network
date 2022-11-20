@@ -42,7 +42,7 @@ export const initialState = {
 };
 
 //reducer
-const usersReducer = (state: any, action: any) => {
+const usersReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case FOLLOW:
             return {

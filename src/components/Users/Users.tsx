@@ -5,7 +5,7 @@ import axios from 'axios';
 
 type UserTypes = {
     isFollowed: boolean;
-    photos: any;
+    photoUrl: any;
     location: any;
     status: any;
     name: any;
@@ -19,8 +19,7 @@ type PropsType = {
 };
 
 export class Users extends React.Component<PropsType> {
-    constructor(props: PropsType) {
-        super(props);
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(response => {
                 this.props.setUsers(response.data.items);
@@ -37,9 +36,7 @@ export class Users extends React.Component<PropsType> {
                             <span>
                                 <div>
                                     <img
-                                        src={u.photos.small != null
-                                            ? u.photos.small
-                                            : userPhoto1}
+                                        src={u.photoUrl.small ? u.photoUrl.small : userPhoto1}
                                         alt=""
                                         className={styles.userPhoto}
                                     />

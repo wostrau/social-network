@@ -3,7 +3,7 @@ import dialogsReducer from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
 
 //store
-export const store: StoreType = {
+/*const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -51,7 +51,7 @@ export const store: StoreType = {
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);
         this._callSubscriber(this._state);
     }
-};
+};*/
 
 //types
 export type MessageType = {
@@ -94,8 +94,5 @@ export type ActionType = {
     type: string
     newText?: string | undefined
 }
-
-//for access to store from global window
-//window.store = store;
 
 //API - application program interface --> just FYI
