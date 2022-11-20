@@ -16,23 +16,46 @@ type PropsType = {
     unfollowUser: (arg: number) => void;
     followUser: (arg: number) => void;
     setUsers: (users: any[]) => void;
+    totalUsersCount: number;
+    pageSize: number;
+    currentPage: number;
+    setCurrentPage: (p: number) => void;
 };
 
 export class Users extends React.Component<PropsType> {
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items);
             });
     };
 
     render() {
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        const pages = [];
+
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+
         return (
             <div>
-                {
-                    this.props.users.map((u: UserTypes) => {
-                        return (
-                            <div key={u.id}>
+                <div>
+                    {pages.map((p: number) => {
+                        return <span
+                            // @ts-ignore
+                            className={this.props.currentPage === p && styles.selectedPage}
+                            onClick={() => {
+                                this.props.setCurrentPage(p)
+                            }}
+                        >{p}</span>
+                    })}
+                </div>
+                <div>
+                    {
+                        this.props.users.map((u: UserTypes) => {
+                            return (
+                                <div key={u.id}>
                             <span>
                                 <div>
                                     <img
@@ -52,7 +75,7 @@ export class Users extends React.Component<PropsType> {
                                     }
                                 </div>
                             </span>
-                                <span>
+                                    <span>
                                 <span>
                                     <div>{u.name}</div>
                                     <div>{u.status}</div>
@@ -62,10 +85,11 @@ export class Users extends React.Component<PropsType> {
                                     <div>{'u.location.city'}</div>
                                 </span>
                             </span>
-                            </div>
-                        )
-                    })
-                }
+                                </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
         );
     };
