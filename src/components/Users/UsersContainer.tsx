@@ -12,6 +12,7 @@ import {
 import axios from 'axios';
 import styles from './Users.module.css';
 import userPhoto1 from '../../assets/images/photographer1.png';
+import Preloader from '../common/Preloader/Preloader';
 
 type UserTypes = {
     isFollowed: boolean;
@@ -59,7 +60,7 @@ class UsersSecondContainer extends React.Component<PropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <img src={userPhoto1} className={styles.usersPhoto}/> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users
                 users={this.props.users}
                 unfollowUser={this.props.unfollowUser}
