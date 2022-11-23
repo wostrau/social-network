@@ -2,38 +2,28 @@ import React from 'react';
 import {Users} from './Users';
 import {connect} from 'react-redux';
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow
 } from '../../redux/users-reducer';
 import axios from 'axios';
-import styles from './Users.module.css';
-import userPhoto1 from '../../assets/images/photographer1.png';
 import Preloader from '../common/Preloader/Preloader';
 
-type UserTypes = {
-    isFollowed: boolean;
-    photoUrl: any;
-    location: any;
-    status: any;
-    name: any;
-    id: number;
-};
 type PropsType = {
     users: any;
-    unfollowUser: (userId: number) => void;
-    followUser: (userId: number) => void;
-    setUsers: (users: any[]) => void;
-    totalUsersCount: number;
     pageSize: number;
     currentPage: number;
-    setCurrentPage: (p: number) => void;
-    setTotalUsersCount: (c: number) => void;
+    totalUsersCount: number;
     isFetching: boolean;
-    toggleIsFetching: (isFetching: boolean) => void;
+    setUsers: (users: [any]) => { type: string; users: [any] };
+    follow: (userId: number) => { type: string; userId: number };
+    unfollow: (userId: number) => { type: string; userId: number };
+    setCurrentPage: (currentPage: number) => { type: string; currentPage: number };
+    setTotalUsersCount: (totalUsersCount: number) => { type: string; totalUsersCount: number };
+    toggleIsFetching: (isFetching: boolean) => { type: string; isFetching: boolean };
 };
 
 //need to move class to container component
@@ -63,8 +53,8 @@ class UsersSecondContainer extends React.Component<PropsType> {
             {this.props.isFetching ? <Preloader/> : null}
             <Users
                 users={this.props.users}
-                unfollowUser={this.props.unfollowUser}
-                followUser={this.props.followUser}
+                unfollow={this.props.unfollow}
+                follow={this.props.follow}
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
@@ -85,27 +75,11 @@ const mapStateToProps = (state: any) => {
     }
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        followUser: (userId: number) => {
-            dispatch(followAC(userId));
-        },
-        unfollowUser: (userId: number) => {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers: (users: any) => {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalUsersCount: number) => {
-            dispatch(setTotalUsersCountAC(totalUsersCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-};
-
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersSecondContainer);
+export const UsersContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching
+})(UsersSecondContainer);

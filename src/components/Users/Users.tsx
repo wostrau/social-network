@@ -12,11 +12,11 @@ type UserTypes = {
 };
 type PropsType = {
     users: any;
-    unfollowUser: (arg: number) => void;
-    followUser: (arg: number) => void;
-    totalUsersCount: number;
     pageSize: number;
     currentPage: number;
+    totalUsersCount: number;
+    follow: (userId: number) => void;
+    unfollow: (userId: number) => void;
     setTotalUsersCount: (c: number) => void;
     onClickPageChanged: (pageNumber: number) => void;
 };
@@ -59,10 +59,10 @@ export const Users = (props: PropsType) => {
                                 <div>
                                     {u.isFollowed
                                         ? <button onClick={() => {
-                                            props.unfollowUser(u.id)
+                                            props.unfollow(u.id)
                                         }}>UNFOLLOW</button>
                                         : <button onClick={() => {
-                                            props.followUser(u.id)
+                                            props.follow(u.id)
                                         }}>FOLLOW</button>
                                     }
                                 </div>
