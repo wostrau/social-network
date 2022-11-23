@@ -1,17 +1,17 @@
 import React from 'react';
 import styles from './Profile.module.css';
-import images from '../../images/images';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 
-const Profile = () => {
+type PropsType = {
+    profile: any;
+};
+
+const Profile = (props: PropsType) => {
     return (
         <div className={styles.main}>
             <ProfileInfo
-                name="Sasha"
-                age="33"
-                status="online"
-                avatar={images.avatar}
+                profile={props.profile}
             />
             <MyPostsContainer/>
         </div>

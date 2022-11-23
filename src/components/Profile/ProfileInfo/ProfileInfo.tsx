@@ -1,25 +1,24 @@
-import React from "react";
+import React from 'react';
 import styles from './ProfileInfo.module.css';
-import images from "../../../images/images";
+import Preloader from '../../common/Preloader/Preloader';
 
-type profileInfoPropsType = {
-    name: string
-    age: string
-    status: string
-    avatar: string
-}
+type PropsType = {
+    profile: any;
+};
 
-const ProfileInfo = (props: profileInfoPropsType) => {
+const ProfileInfo = (props: PropsType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
+
     return (
         <div className={styles.item}>
             <img
-                src={images.avatar}
+                src={props.profile.photos.large}
                 className={styles.avatar}
-                alt="users avatar"
+                alt='USER'
             ></img>
-            <div>{props.name}</div>
-            <div>{props.age}</div>
-            <div>{props.status}</div>
+            <div>DESCRIPTION</div>
         </div>
     )
 };
