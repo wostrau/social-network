@@ -35,6 +35,7 @@ const mapStateToProps = (state: any) => ({
     match: state.profilePage.match
 });
 
+// @ts-ignore
 const WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
 export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent);

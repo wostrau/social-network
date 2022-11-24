@@ -9,8 +9,9 @@ type MyPostsPropsType = {
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
-    const postsElements = props.posts.map((p: { avatar: any; message: string; likesCount: number; }) => {
+    const postsElements = props.posts.map((p: { avatar: any; message: string; likesCount: number; }, index: React.Key | null | undefined) => {
         return <Post
+            key={index}
             avatar={p.avatar}
             message={p.message}
             likesCount={p.likesCount}

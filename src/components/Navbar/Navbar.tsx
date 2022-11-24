@@ -8,29 +8,20 @@ const Navbar = () => {
             <div className={styles.item}>
                 <NavLink
                     to="/profile"
-                    className={({isActive}) => styles.activeLink}
+                    /*className={styles.activeLink}*/
                 >Profile</NavLink>
             </div>
             <div className={styles.item}>
                 <NavLink
                     to="/dialogs"
-                    className={({isActive}) => styles.activeLink}
-                >Messages</NavLink>
+                    /*className={styles.activeLink}*/
+                >Dialogs</NavLink>
             </div>
             <div className={styles.item}>
                 <NavLink
                     to="/users"
-                    className={({isActive}) => styles.activeLink}
+                    /*className={styles.activeLink}*/
                 >Users</NavLink>
-            </div>
-            <div className={styles.item}>
-                <a href={''}>News</a>
-            </div>
-            <div className={styles.item}>
-                <a href={''}>Music</a>
-            </div>
-            <div className={styles.item}>
-                <a href={''}>Settings</a>
             </div>
         </nav>
     );
