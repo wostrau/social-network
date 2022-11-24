@@ -70,7 +70,7 @@ const usersReducer = (state = initialState, action: any) => {
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.totalCount};
         case TOGGLE_IS_FETCHING:
-            return {...state, isFetching: action.isFetching}
+            return {...state, isFetching: action.isFetching};
         default:
             return state;
     }
