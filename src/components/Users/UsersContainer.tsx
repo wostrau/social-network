@@ -3,6 +3,7 @@ import {Users} from './Users';
 import {connect} from 'react-redux';
 import {followTC, getUsersTC, setCurrentPage, toggleIsFollowingProgress, unfollowTC} from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 type PropsType = {
     users: any;
@@ -44,6 +45,8 @@ class UsersSecondContainer extends React.Component<PropsType> {
     };
 }
 
+const withRedirect = withAuthRedirect(UsersSecondContainer);
+
 const mapStateToProps = (state: any) => {
     return {
         users: state.usersPage.users,
@@ -61,4 +64,4 @@ export const UsersContainer = connect(mapStateToProps, {
     getUsersTC,
     followTC,
     unfollowTC
-})(UsersSecondContainer);
+})(withRedirect);
