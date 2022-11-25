@@ -4,10 +4,6 @@ import images from '../../images/images';
 import {NavLink} from 'react-router-dom';
 
 type PropsType = {
-    setAuthUserData: (userId: any, email: string, login: string) => void
-    userId: null | any
-    email: null | any
-    login: null | any
     isAuth: boolean
 };
 

@@ -1,4 +1,6 @@
 //constants for action type naming
+import {authAPI} from '../api/api';
+
 const SET_USER_DATA = 'SET-USER-DATA';
 
 //initial state --> used in <User/> at the moment
@@ -17,15 +19,23 @@ const authReducer = (state = initialState, action: any) => {
                 ...state,
                 ...action.data,
                 isAuth: true
-                };
+            };
         default:
             return state;
     }
 };
 
 //action creators w/o 'AC' mark in its name
-export const setAuthUserData = (userId: any, email: string, login: string) => {
+const setAuthUserData = (userId: any, email: string, login: string) => {
     return {type: SET_USER_DATA, data: {userId, email, login}}
+};
+export const getAuthUserDataTC = () => (dispatch: (AC: any) => {}) => {
+    authAPI.me().then(response => {
+        if (response.data.resultCode === 0) {
+            const {userId, email, login} = response.data.data;
+            dispatch(setAuthUserData(userId, email, login));
+        }
+    });
 };
 
 export default authReducer;
