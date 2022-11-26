@@ -8,6 +8,7 @@ import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 type PropsType = {
     profile: any;
+    status: string;
     getUserProfileTC: (userId: number) => void;
     match: any;
     isAuth: boolean;
@@ -26,13 +27,15 @@ class ProfileContainer extends React.Component<PropsType> {
         return <Profile
             {...this.props}
             profile={this.props.profile}
+            status={this.props.status}
         />
     };
 }
 
 const mapStateToProps = (state: any) => ({
     profile: state.profilePage.profile,
-    match: state.profilePage.match
+    match: state.profilePage.match,
+    status: state.profilePage.status
 });
 
 export default connect(

@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
+import ProfileStatus from '../ProfileStatus/ProfileStatus';
 
 type PropsType = {
     profile: any;
+    status: string;
 };
 
 const ProfileInfo = (props: PropsType) => {
@@ -18,6 +20,10 @@ const ProfileInfo = (props: PropsType) => {
                 className={styles.avatar}
                 alt='USER'
             ></img>
+            <ProfileStatus
+                profile={props.profile}
+                status={props.status}
+            />
             <div>DESCRIPTION</div>
         </div>
     )
