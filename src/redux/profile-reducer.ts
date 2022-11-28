@@ -1,9 +1,10 @@
 import {PostType} from './store';
-import {usersAPI} from '../api/api';
+import {profileAPI, usersAPI} from '../api/api';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const SET_USER_STATUS = 'SET-USER-STATUS';
 
 const initialState = {
     posts: [
@@ -14,7 +15,8 @@ const initialState = {
         {id: 5, message: 'Yo!', likesCount: 14}
     ],
     newPostText: 'SAMURAI',
-    profile: null
+    profile: null,
+    status: ''
 };
 
 const profileReducer = (state = initialState, action: any) => {
@@ -35,6 +37,8 @@ const profileReducer = (state = initialState, action: any) => {
             return {...state, newPostText: action.newText};
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
+        case SET_USER_STATUS:
+            return {...state, status: action.status};
         default:
             return state;
     }
@@ -44,9 +48,24 @@ const profileReducer = (state = initialState, action: any) => {
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostTextActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText});
 const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile});
+const setUserStatus = (status: string) => ({type: SET_USER_STATUS, status});
+
+//thunk creators
 export const getUserProfileTC = (userId: number) => (dispatch: (AC: any) => {}) => {
     usersAPI.getProfile(userId).then(response => {
         dispatch(setUserProfile(response.data))
+    });
+};
+export const getUserStatusTC = (userId: number) => (dispatch: (AC: any) => {}) => {
+    profileAPI.getStatus(userId).then(response => {
+        dispatch(setUserStatus(response.data))
+    });
+};
+export const updateUserStatusTC = (status: string) => (dispatch: (AC: any) => {}) => {
+    profileAPI.updateStatus(status).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(status));
+        }
     });
 };
 

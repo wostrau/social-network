@@ -1,26 +1,28 @@
 import React from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
-import {getUserProfileTC} from '../../redux/profile-reducer';
+import {getUserProfileTC, getUserStatusTC, updateUserStatusTC} from '../../redux/profile-reducer';
 // @ts-ignore
 import {withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
-type PropsType = {
+export type PropsType = {
+    match: any;
     profile: any;
     status: string;
     getUserProfileTC: (userId: number) => void;
-    match: any;
-    isAuth: boolean;
-}
+    getUserStatusTC: (userId: number) => void;
+    updateUserStatusTC: (status: string) => void;
+};
 
 class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 1
+            userId = 25802
         }
         this.props.getUserProfileTC(userId);
+        this.props.getUserStatusTC(userId);
     };
 
     render() {
@@ -28,6 +30,7 @@ class ProfileContainer extends React.Component<PropsType> {
             {...this.props}
             profile={this.props.profile}
             status={this.props.status}
+            updateUserStatusTC={this.props.updateUserStatusTC}
         />
     };
 }
@@ -41,5 +44,9 @@ const mapStateToProps = (state: any) => ({
 export default connect(
     withRouter,
     withAuthRedirect,
-    connect(mapStateToProps, {getUserProfileTC})
+    connect(mapStateToProps, {
+        getUserProfileTC,
+        getUserStatusTC,
+        updateUserStatusTC
+    })
 )(ProfileContainer);

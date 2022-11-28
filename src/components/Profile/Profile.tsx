@@ -3,9 +3,10 @@ import styles from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 
-type PropsType = {
+export type PropsType = {
     profile: any;
     status: string;
+    updateUserStatusTC: (status: string) => void;
 };
 
 const Profile = (props: PropsType) => {
@@ -14,6 +15,7 @@ const Profile = (props: PropsType) => {
             <ProfileInfo
                 profile={props.profile}
                 status={props.status}
+                updateUserStatusTC={props.updateUserStatusTC}
             />
             <MyPostsContainer/>
         </div>

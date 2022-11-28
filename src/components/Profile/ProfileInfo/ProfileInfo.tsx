@@ -3,9 +3,10 @@ import styles from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatus from '../ProfileStatus/ProfileStatus';
 
-type PropsType = {
+export type PropsType = {
     profile: any;
     status: string;
+    updateUserStatusTC: (status: string) => void;
 };
 
 const ProfileInfo = (props: PropsType) => {
@@ -23,6 +24,7 @@ const ProfileInfo = (props: PropsType) => {
             <ProfileStatus
                 profile={props.profile}
                 status={props.status}
+                updateUserStatusTC={props.updateUserStatusTC}
             />
             <div>DESCRIPTION</div>
         </div>

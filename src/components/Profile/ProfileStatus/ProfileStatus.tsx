@@ -1,30 +1,37 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import Preloader from '../../common/Preloader/Preloader';
 
-type PropsType = {
-    profile: any
-    status: any
-}
+export type PropsType = {
+    profile: any;
+    status: string;
+    updateUserStatusTC: (status: string) => void;
+};
 
 class ProfileStatus extends React.Component<PropsType> {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     };
 
     componentDidMount() {
         if (!this.props.profile) return <Preloader/>;
     };
 
-    activateEditMode() {
+    activateEditMode = () => {
         this.setState({
             editMode: true
         })
     };
 
-    deactivateEditMode() {
+    deactivateEditMode = () => {
         this.setState({
             editMode: false
-        })
+        });
+        this.props.updateUserStatusTC(this.state.status);
+    };
+
+    onChangeStatusHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        this.setState({status: event.currentTarget.value});
     };
 
     render() {
@@ -33,15 +40,16 @@ class ProfileStatus extends React.Component<PropsType> {
                 {!this.state.editMode &&
                     <div>
                         <span
-                            onDoubleClick={this.activateEditMode.bind(this)}
-                        >{this.props.status}</span>
+                            onDoubleClick={this.activateEditMode}
+                        >{this.props.status || 'NO STATUS AT THE MOMENT'}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
                         <input
-                            value={this.props.status}
-                            onBlur={this.deactivateEditMode.bind(this)}
+                            onChange={this.onChangeStatusHandler}
+                            value={this.state.status}
+                            onBlur={this.deactivateEditMode}
                             autoFocus={true}
                         />
                     </div>
