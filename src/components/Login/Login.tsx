@@ -5,6 +5,7 @@ import {requiredField} from '../../utilities/validators/validators';
 import {connect} from 'react-redux';
 import {loginUserTC, logoutUserTC} from '../../redux/auth-reducer';
 import {Redirect} from 'react-router';
+import styles from '../common/FormControl/FormControl.module.css';
 
 const LoginForm = (props: any) => {
     return (
@@ -32,6 +33,7 @@ const LoginForm = (props: any) => {
                     component={Input}
                 >remember me</Field>
             </div>
+            {props.error && <div className={styles.formSummaryError}>{props.error}</div>}
             <div>
                 <button>Submit</button>
             </div>
@@ -43,7 +45,7 @@ const LoginReduxForm = reduxForm({
     form: 'login'
 })(LoginForm);
 
-export const Login = (props: any) => {
+const Login = (props: any) => {
     const onSubmitHandler = (formData: any) => {
         props.loginUserTC(formData.email, formData.password, formData.rememberMe);
     };

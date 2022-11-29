@@ -1,6 +1,7 @@
-//constants for action type naming
 import {authAPI} from '../api/api';
+import {stopSubmit} from 'redux-form';
 
+//constants for action type naming
 const SET_USER_DATA = 'SET-USER-DATA';
 
 //initial state --> used in <User/> at the moment
@@ -43,6 +44,11 @@ export const loginUserTC = (email: string, password: string, rememberMe: boolean
         .then(response => {
         if (response.data.resultCode === 0) {
             dispatch(getAuthUserDataTC());
+        } else {
+            const errorMessage = response.data.resultCode.messages.length > 0
+                ? response.data.resultCode.messages[0]
+                : 'SOME ERROR';
+            dispatch(stopSubmit('login', {_error: errorMessage}));
         }
     });
 };

@@ -13,13 +13,14 @@ export type PropsType = {
     getUserProfileTC: (userId: number) => void;
     getUserStatusTC: (userId: number) => void;
     updateUserStatusTC: (status: string) => void;
+    authorizedUserId: number;
 };
 
 class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 25802
+            userId = this.props.authorizedUserId
         }
         this.props.getUserProfileTC(userId);
         this.props.getUserStatusTC(userId);
@@ -38,7 +39,9 @@ class ProfileContainer extends React.Component<PropsType> {
 const mapStateToProps = (state: any) => ({
     profile: state.profilePage.profile,
     match: state.profilePage.match,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 });
 
 export default connect(
