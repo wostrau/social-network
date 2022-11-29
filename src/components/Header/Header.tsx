@@ -4,7 +4,9 @@ import images from '../../images/images';
 import {NavLink} from 'react-router-dom';
 
 type PropsType = {
-    isAuth: boolean
+    isAuth: boolean;
+    login: string;
+    logoutUserTC: () => void;
 };
 
 const Header = (props: PropsType) => {
@@ -15,7 +17,9 @@ const Header = (props: PropsType) => {
                 SOCIAL NETWORK STUDENTS PROJECT FROM SAMURAI WAY REACT COURSE
             </div>
             <div className={styles.loginBlock}>
-                {props.isAuth ? <NavLink to={'/login'}>LOGIN</NavLink> : false}
+                {props.isAuth
+                    ? <div>{props.login} - <button onClick={props.logoutUserTC}>LOGOUT</button></div>
+                    : <NavLink to={'/login'}>LOGIN</NavLink>}
             </div>
         </header>
     );
