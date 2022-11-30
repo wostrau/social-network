@@ -32,7 +32,7 @@ const setAuthUserData = (userId: null | any, email: null | string, login: null |
 
 //thunk creators
 export const getAuthUserDataTC = () => (dispatch: (AC: any) => {}) => {
-    authAPI.me().then(response => {
+    return authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             const {userId, email, login} = response.data.data;
             dispatch(setAuthUserData(userId, email, login, true));
@@ -52,7 +52,6 @@ export const loginUserTC = (email: string, password: string, rememberMe: boolean
         }
     });
 };
-
 export const logoutUserTC = () => (dispatch: (AC: any) => {}) => {
     authAPI.logout()
         .then(response => {
