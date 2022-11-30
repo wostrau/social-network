@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatus from '../ProfileStatus/ProfileStatus';
+import ProfileStatusWithHooks from '../ProfileStatus/ProfileStatusWithHooks';
 
 export type PropsType = {
     profile: any;
@@ -21,7 +22,7 @@ const ProfileInfo = (props: PropsType) => {
                 className={styles.avatar}
                 alt='USER'
             ></img>
-            <ProfileStatus
+            <ProfileStatusWithHooks
                 profile={props.profile}
                 status={props.status}
                 updateUserStatusTC={props.updateUserStatusTC}
