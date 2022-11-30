@@ -5,6 +5,14 @@ import {followTC, getUsersTC, setCurrentPage, toggleIsFollowingProgress, unfollo
 import Preloader from '../common/Preloader/Preloader';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from '../../redux/users-selector';
 
 type PropsType = {
     users: any;
@@ -48,12 +56,12 @@ class UsersSecondContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: any) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        currentPage: getCurrentPage(state),
+        totalUsersCount: getTotalUsersCount(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 };
 
