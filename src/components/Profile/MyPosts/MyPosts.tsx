@@ -8,10 +8,9 @@ import {Textarea} from '../../common/FormControl/FormControl';
 type MyPostsPropsType = {
     posts: any
     addPost: any
-    updateNewPostText: any
 }
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = React.memo((props: MyPostsPropsType) => {
     const postsElements = props.posts.map((p: { avatar: any; message: string; likesCount: number; }, index: React.Key | null | undefined) => {
         return <Post
             key={index}
@@ -36,7 +35,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     );
-};
+});
 
 const AddNewPostForm = (props: any) => {
     const maxLength30 = maxLengthVC(30);

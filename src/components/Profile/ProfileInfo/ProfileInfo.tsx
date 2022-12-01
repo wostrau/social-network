@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
-import ProfileStatus from '../ProfileStatus/ProfileStatus';
 import ProfileStatusWithHooks from '../ProfileStatus/ProfileStatusWithHooks';
 
 export type PropsType = {
