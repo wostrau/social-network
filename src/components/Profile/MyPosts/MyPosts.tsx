@@ -11,7 +11,9 @@ type MyPostsPropsType = {
 }
 
 const MyPosts = React.memo((props: MyPostsPropsType) => {
-    const postsElements = props.posts.map((p: { avatar: any; message: string; likesCount: number; }, index: React.Key | null | undefined) => {
+    const postsElements = [...props.posts]
+        .reverse()
+        .map((p: { avatar: any; message: string; likesCount: number; }, index: React.Key | null | undefined) => {
         return <Post
             key={index}
             avatar={p.avatar}
