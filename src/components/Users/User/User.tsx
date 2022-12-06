@@ -8,14 +8,14 @@ type UserType = {
     name: string;
     status: string;
     isFollowed: boolean;
-}
+};
 
 type PropsType = {
     user: UserType;
     followingInProgress: [any];
     followTC: (userId: number) => void;
     unfollowTC: (userId: number) => void;
-}
+};
 
 export const User = (props: PropsType) => {
     return (

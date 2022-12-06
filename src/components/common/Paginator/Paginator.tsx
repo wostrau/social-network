@@ -6,7 +6,7 @@ type PropsType = {
     currentPage: number;
     totalUsersCount: number;
     onClickPageChanged: (pageNumber: number) => void;
-}
+};
 
 export const Paginator = (props: PropsType) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
