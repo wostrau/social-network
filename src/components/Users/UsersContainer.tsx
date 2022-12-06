@@ -1,7 +1,13 @@
 import React from 'react';
 import {Users} from './Users';
 import {connect} from 'react-redux';
-import {followTC, getUsersTC, setCurrentPage, toggleIsFollowingProgress, unfollowTC} from '../../redux/users-reducer';
+import {
+    followTC,
+    getUsersTC,
+    setCurrentPageAC,
+    toggleIsFollowingProgressAC,
+    unfollowTC
+} from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
@@ -21,7 +27,7 @@ type PropsType = {
     totalUsersCount: number;
     isFetching: boolean;
     followingInProgress: [any];
-    toggleIsFollowingProgress: (isFetching: boolean, userId: number) => { type: string, isFetching: boolean, userId: number };
+    toggleIsFollowingProgressAC: (isFetching: boolean, userId: number) => { type: string, isFetching: boolean, userId: number };
     getUsersTC: (currentPage: number, pageSize: number) => void;
     followTC: (userId: number) => void;
     unfollowTC: (userId: number) => void;
@@ -45,7 +51,7 @@ class UsersSecondContainer extends React.Component<PropsType> {
                 currentPage={this.props.currentPage}
                 totalUsersCount={this.props.totalUsersCount}
                 followingInProgress={this.props.followingInProgress}
-                toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+                toggleIsFollowingProgress={this.props.toggleIsFollowingProgressAC}
                 followTC={this.props.followTC}
                 unfollowTC={this.props.unfollowTC}
                 onClickPageChanged={this.onClickPageChanged}
@@ -68,8 +74,8 @@ const mapStateToProps = (state: any) => {
 export const UsersContainer = compose(
     withAuthRedirect,
     connect(mapStateToProps, {
-        setCurrentPage,
-        toggleIsFollowingProgress,
+        setCurrentPageAC,
+        toggleIsFollowingProgressAC,
         getUsersTC,
         followTC,
         unfollowTC

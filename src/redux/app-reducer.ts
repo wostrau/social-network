@@ -1,15 +1,15 @@
 import {getAuthUserDataTC} from './auth-reducer';
 
-//constants for action type naming
+// Actions:
 const INITIALIZED_SUCCESS = 'INITIALIZED-SUCCESS';
 
-//initial state --> used in <User/> at the moment
+// Initial state:
 export const initialState = {
     isInitialized: false,
 };
 
-//reducer
-const appReducer = (state = initialState, action: any) => {
+// Reducer:
+export const appReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {
@@ -21,15 +21,13 @@ const appReducer = (state = initialState, action: any) => {
     }
 };
 
-//action creators
+// Action creators:
 const initializedSuccessAC = () => ({type: INITIALIZED_SUCCESS});
 
-//thunk creators
+// Thunk creators:
 export const initializeAppTC = () => (dispatch: (AC: any) => any) => {
     const promise = dispatch(getAuthUserDataTC());
     Promise.all([promise]).then(()=>{
         dispatch(initializedSuccessAC());
     });
 };
-
-export default appReducer;
