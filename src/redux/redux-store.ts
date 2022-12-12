@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, legacy_createStore as createStore} from 'redux';
+import {applyMiddleware, combineReducers, compose, legacy_createStore as createStore} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {profileReducer} from './profile-reducer';
 import {dialogsReducer} from './dialogs-reducer';
@@ -18,4 +18,12 @@ const reducers = combineReducers({
     form: formReducer
 });
 
-export const store = createStore(reducers, applyMiddleware(thunkMiddleware));
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
