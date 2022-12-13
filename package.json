@@ -30,6 +30,11 @@
     "typescript": "^4.7.2",
     "web-vitals": "^2.1.4"
   },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios|react-day-picker)/)"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -55,8 +60,13 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^29.3.1",
     "eslint-config-react": "^1.1.7",
-    "eslint-config-react-app": "^7.0.1"
+    "eslint-config-react-app": "^7.0.1",
+    "ts-jest": "^29.0.3"
   }
 }

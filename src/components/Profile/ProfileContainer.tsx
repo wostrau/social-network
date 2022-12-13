@@ -2,9 +2,9 @@ import React from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {getUserProfileTC, getUserStatusTC, updateUserStatusTC} from '../../redux/profile-reducer';
-// @ts-ignore
 import {withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {compose} from 'redux';
 
 export type PropsType = {
     match: any;
@@ -48,7 +48,7 @@ const mapStateToProps = (state: any) => ({
     isAuth: state.auth.isAuth
 });
 
-export default connect(
+export default compose(
     withRouter,
     withAuthRedirect,
     connect(mapStateToProps, {

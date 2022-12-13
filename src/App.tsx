@@ -6,29 +6,9 @@ import {UsersContainer} from './components/Users/UsersContainer';
 import Login from './components/Login/Login';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-// @ts-ignore
 import {Route} from 'react-router';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {withRouter} from 'react-router-dom';
-import {initializeAppTC} from './redux/app-reducer';
-import Preloader from './components/common/Preloader/Preloader';
 
-type PropsType = {
-    initializeAppTC: () => void;
-    isInitialized: boolean;
-};
-
-class App extends React.Component<PropsType> {
-    componentDidMount() {
-        this.props.initializeAppTC();
-    };
-
-    render() {
-        if (!this.props.isInitialized) {
-            return <Preloader/>
-        }
-
+export const App = () => {
         return (
             <div className="App-wrapper">
                 <HeaderContainer/>
@@ -53,14 +33,4 @@ class App extends React.Component<PropsType> {
                 </div>
             </div>
         )
-    };
-}
-
-const mapStateToProps = (state: any) => ({
-    isInitialized: state.app.isInitialized
-});
-
-export default compose(
-    withRouter,
-    connect(mapStateToProps, {initializeAppTC})
-)(App);
+};

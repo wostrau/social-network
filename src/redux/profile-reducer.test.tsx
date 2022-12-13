@@ -1,4 +1,4 @@
-import profileReducer, {addPostActionCreator, deletePostAC} from './profile-reducer';
+import {addPostActionCreator, deletePostAC, profileReducer} from './profile-reducer';
 import React from 'react';
 
 const testState = {
@@ -8,7 +8,9 @@ const testState = {
         {id: 3, message: 'Blah-blah', likesCount: 12},
         {id: 4, message: 'Yeah!', likesCount: 13},
         {id: 5, message: 'Yo!', likesCount: 14}
-    ]
+    ],
+    profile: null,
+    status: ''
 };
 
 it('new post length should be corrected', () => {
