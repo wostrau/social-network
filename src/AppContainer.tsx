@@ -25,7 +25,9 @@ class AppContainer extends React.Component<PropsType> {
 
         return (
             <React.StrictMode>
-                <BrowserRouter>
+                <BrowserRouter
+                    basename={process.env.PUBLIC_URL}
+                >
                     <Provider store={store}>
                         <App/>
                     </Provider>
