@@ -6,7 +6,6 @@ type PropsType = {
     pageSize: number;
     currentPage: number;
     totalUsersCount: number;
-    portionSize: number;
     onClickPageChanged: (pageNumber: number) => void;
 };
 
@@ -15,10 +14,11 @@ export const Paginator = (props: PropsType) => {
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) pages.push(i);
 
-    const portionCount = Math.ceil(pagesCount / props.portionSize);
+    const portionSize = 10;
+    const portionCount = Math.ceil(pagesCount / portionSize);
     const [portionNumber, setPortionNumber] = useState(1);
-    const leftPortionPageNumber = (portionNumber - 1) * props.portionSize + 1;
-    const rightPortionPageNumber = portionNumber * props.portionSize;
+    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
+    const rightPortionPageNumber = portionNumber * portionSize;
 
     return (
         <div className={styles.paginator}>
