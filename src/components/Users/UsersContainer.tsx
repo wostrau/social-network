@@ -73,7 +73,7 @@ const mapStateToProps = (state: any) => {
     }
 };
 
-export const UsersContainer = compose(
+const UsersContainer = compose(
     withAuthRedirect,
     connect(mapStateToProps, {
         setCurrentPageAC,
@@ -83,3 +83,5 @@ export const UsersContainer = compose(
         unfollowTC
     })
 )(UsersSecondContainer);
+
+export default UsersContainer;
